@@ -26,6 +26,13 @@ public class Library
         
     }
 
+    /**
+     * Constructs a Library object by reading data from a BufferedReader.
+     *
+     * @param br The BufferedReader from which to read library data.
+     * @throws IOException If an I/O error occurs.
+     */
+
     public Library(BufferedReader br) throws IOException {
         this.name = br.readLine();
         int numPublications = Integer.parseInt(br.readLine());
@@ -41,6 +48,13 @@ public class Library
 
         
     }
+
+    /**
+     * Saves the library data to a BufferedWriter.
+     *
+     * @param bw The BufferedWriter to which the library data should be saved.
+     * @throws IOException If an I/O error occurs.
+     */
 
     public void save(BufferedWriter bw) throws IOException {
         bw.write(name + "\n");

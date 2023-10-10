@@ -1,3 +1,5 @@
+// Talha Tahmid 1001910304
+
 package library;
 
 import java.time.LocalDate;
@@ -41,6 +43,13 @@ public class Publication
         this.copyright = copyright;
     }
 
+    /**
+     * Constructs a Publication object by reading data from a BufferedReader.
+     *
+     * @param br The BufferedReader from which to read publication data.
+     * @throws IOException If an I/O error occurs.
+     */
+
     public Publication(BufferedReader br) throws IOException
     {
         this.title = br.readLine();
@@ -61,6 +70,13 @@ public class Publication
 
     }
 
+
+    /**
+     * Saves the publication data to a BufferedWriter.
+     *
+     * @param bw The BufferedWriter to which the publication data should be saved.
+     * @throws IOException If an I/O error occurs.
+     */
     public void save(BufferedWriter bw) throws IOException
     {
         bw.write(title + '\n');

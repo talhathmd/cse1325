@@ -1,3 +1,5 @@
+// Talha Tahmid 1001910304
+
 package library;
 import java.time.Duration;
 import java.io.BufferedReader;
@@ -34,11 +36,24 @@ public class Video extends Publication
         }
     }
 
+    /**
+     * Constructs a Video object by reading data from a BufferedReader.
+     *
+     * @param br The BufferedReader from which to read video data.
+     * @throws IOException If an I/O error occurs.
+     */
+
     public Video(BufferedReader br) throws IOException {
         super(br); 
         int runtimeMinutes = Integer.parseInt(br.readLine());
         this.runtime = Duration.ofMinutes(runtimeMinutes);
     }
+    /**
+     * Saves the video data to a BufferedWriter.
+     *
+     * @param bw The BufferedWriter to which the video data should be saved.
+     * @throws IOException If an I/O error occurs.
+     */
 
     public void save(BufferedWriter bw) throws IOException {
         super.save(bw);
