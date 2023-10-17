@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.TreeSet;
+import java.util.SortedSet;
+import java.lang.Math;
 
 public class WordSearch {
     private static final String usage = "usage: java WordSearch [-h] [-v] [#threads] [#puzzles] [puzzleFile]...";
@@ -64,32 +67,39 @@ public class WordSearch {
     public void solve() {
         System.err.println ("\n" + NUM_PUZZLES + " puzzles with " 
             + NUM_THREADS + " threads");
-        solveWithThreads();
-    }
+        ArrayList<Thread> threadObjects = new ArrayList<Thread>();
+    
     // Solve puzzles with multiple threads
-    public void solveWithThreads() {
-        List<Thread> threads = new ArrayList<>();
+        ArrayList<Thread> threadObj = new ArrayList<Thread>();
         
-        for (int i = 0; i < NUM_THREADS; ++i) {
+        for(int i =0; i<NUM_THREADS; i++){
             final int threadID = i;
-            final int firstPuzzle = i * (NUM_PUZZLES / NUM_THREADS);
-            final int lastPuzzlePlusOne = (i + 1) * (NUM_PUZZLES / NUM_THREADS);
+            int subsetSize = (int)(Math.ceil((double)NUM_PUZZLES/NUM_THREADS));
+            final int start = i*subsetSize;
             
-            Thread thread = new Thread(() -> solve(threadID, firstPuzzle, lastPuzzlePlusOne));
-            thread.start();
-            threads.add(thread);
+            int tempEnd = (i+1)*subsetSize;
+
+
+            if(tempEnd>NUM_PUZZLES){
+                tempEnd = NUM_PUZZLES;
+            }
+            final int end = tempEnd;
+
+
+            threadObj.add(new Thread(()->solve(threadID, start, end)));
+            threadObj.get(i).start();
         }
 
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                System.err.println("Thread interrupted: " + e.getMessage());
+        for(int i =0; i<NUM_THREADS; i++){
+            try{
+                threadObj.get(i).join();
+            } catch(Exception e){
+                System.err.println("Thread interrupted: "+ e.getMessage());
             }
         }
     }
     // Solve individual puzzles
-    public void solve(int threadID, int firstPuzzle, int lastPuzzlePlusOne) {
+    public void solve(final int threadID, final int firstPuzzle, final int lastPuzzlePlusOne) {
         System.err.println("Thread " + threadID + ": " + firstPuzzle + "-" + (lastPuzzlePlusOne-1));
         for(int i=firstPuzzle; i<lastPuzzlePlusOne; ++i) {
             Puzzle p = puzzles.get(i);
@@ -97,10 +107,10 @@ public class WordSearch {
             for(String word : p.getWords()) {
                 try {
                     Solution s = solver.solve(word);
-                    if(s == null) System.err.println("### Failed to solve " + p.name() + " for '" + word + "'");
+                    if(s == null) System.err.println("#### Failed to solve " + p.name() + " for '" + word + "'");
                     else solutions.add(s);
                 } catch (Exception e) {
-                    System.err.println("### Exception solving " + p.name() 
+                    System.err.println("#### Exception solving " + p.name() 
                         + " for " + word + ": " + e.getMessage());
                 }
             }
@@ -125,5 +135,6 @@ public class WordSearch {
     public final boolean verbose;
     // List to hold puzzles and solutions
     private List<Puzzle> puzzles = new ArrayList<>();
-    private List<Solution> solutions = new ArrayList<>();
+    private SortedSet<Solution> solutions = new TreeSet<Solution>();
+
 }

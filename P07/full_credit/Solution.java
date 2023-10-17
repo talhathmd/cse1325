@@ -10,14 +10,15 @@ public class Solution implements Comparable<Solution> {
     }
     
     @Override
-    public int compareTo(Solution other) {
-        int nameComparison = this.name.compareTo(other.name);
-        if (nameComparison != 0) {
-            return nameComparison;
-        } else {
-            return this.word.compareTo(other.word);
+    public int compareTo(Solution solution){
+        if(this.name.equals(solution.name) == true){
+            return this.word.compareTo(solution.word);
+        }
+        else{
+            return this.name.compareTo(solution.name);
         }
     }
+   
 
     @Override
     public String toString() {
