@@ -25,6 +25,4 @@ public class Line
     {
         return String.format("%s (%.3f, %.3f) - (%.3f, %.3f)", color, x1, y1, x2, y2);
     }
-
-    
 }
