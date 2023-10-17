@@ -1,4 +1,4 @@
-import java.util.Comparator;
+import java.lang.Comparable;
 
 public class Solution implements Comparable<Solution> { 
     public Solution(String name, String word, int x, int y, Direction direction) {

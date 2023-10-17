@@ -1,6 +1,3 @@
-import java.util.List;
-import java.util.ArrayList;
-
 public class Solver {
     public Solver(Puzzle puzzle) {
         this.puzzle = puzzle;

@@ -1,4 +1,4 @@
-// Talha Tahmid 1001910304
+//  Talha Tahmid 1001910304
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
@@ -67,10 +67,9 @@ public class WordSearch {
     public void solve() {
         System.err.println ("\n" + NUM_PUZZLES + " puzzles with " 
             + NUM_THREADS + " threads");
-        ArrayList<Thread> threadObjects = new ArrayList<Thread>();
     
     // Solve puzzles with multiple threads
-        ArrayList<Thread> threadObj = new ArrayList<Thread>();
+        ArrayList<Thread> threadObjects = new ArrayList<Thread>();
         
         for(int i =0; i<NUM_THREADS; i++){
             final int threadID = i;
@@ -86,13 +85,13 @@ public class WordSearch {
             final int end = tempEnd;
 
 
-            threadObj.add(new Thread(()->solve(threadID, start, end)));
-            threadObj.get(i).start();
+            threadObjects.add(new Thread(()->solve(threadID, start, end)));
+            threadObjects.get(i).start();
         }
 
         for(int i =0; i<NUM_THREADS; i++){
             try{
-                threadObj.get(i).join();
+                threadObjects.get(i).join();
             } catch(Exception e){
                 System.err.println("Thread interrupted: "+ e.getMessage());
             }
