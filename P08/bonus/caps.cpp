@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
         std::cout << word << std::endl;
     }
 
-    std::cout << "" << std::endl;
+    std::cout << std::endl;
 
     std::cout << "Lower Case:" << std::endl;
     for (const std::string& word : *no_caps) {
