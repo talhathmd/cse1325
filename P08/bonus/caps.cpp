@@ -1,9 +1,8 @@
+// Talha Tahmid 1001910304
 #include <iostream>
 #include <string>
 #include <vector>
 
-std::vector<std::string> caps;
-std::vector<std::string> no_caps;
 
 int main(int argc, char* argv[]) {
     std::vector<std::string> caps;
