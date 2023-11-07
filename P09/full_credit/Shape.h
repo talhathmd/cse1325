@@ -6,6 +6,7 @@
 class Shape {
 public:
 
+
     // Declaring the methods
     virtual std::string name() const;
     virtual double area() const;
