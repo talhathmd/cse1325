@@ -18,6 +18,9 @@ public:
     Time operator+(int seconds) const;
 
     int operator[](int index) const;
+
+    friend Time operator+(int seconds, const Time& time);
+
     
     Time operator+(const Time& time) const;
     Time operator++(); // Pre-increment

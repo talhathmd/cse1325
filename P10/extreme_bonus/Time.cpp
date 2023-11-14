@@ -20,6 +20,15 @@ Time Time::operator+(const Time& time) const {
     return result;
 }
 
+
+Time operator+(int seconds, const Time& time) {
+    Time result = time;
+    result._second += seconds;
+    result.rationalize();
+    return result;
+}
+
+
 Time Time::operator+(int seconds) const {
     Time result = *this;
     result._second += seconds;
