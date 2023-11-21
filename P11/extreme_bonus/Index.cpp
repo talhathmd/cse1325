@@ -12,17 +12,17 @@ std::ostream& operator<<(std::ostream& ost, const Index& index) {
         const auto& word = entry.first;
         const auto& location = entry.second;
 
-        // Check if the word has already been printed
+        // Checking if the word has already been printed
         if (printed_words.find(word) == printed_words.end()) {
             ost << word << ": " << location;
 
-            // Mark the word as printed
+            // Marking the word as printed
             printed_words.insert(word);
 
-            // Find other occurrences of the same word and print them
+            // Finding other occurrences of the same word and print them
             auto range = index._index.equal_range(word);
             auto it = range.first;
-            ++it; // Move to the next occurrence
+            ++it; // Moving to the next occurrence
             while (it != range.second) {
                 ost << ", " << it->second;
                 ++it;
